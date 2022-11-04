@@ -1,12 +1,15 @@
-export default function getCoins(change) {
+ export default function getCoins(change) {
   
-  let coinsInv = [change,0,0,0,0];
-  let invCoinValues = [50,20,10,5,2]
+  let coins = [0,0,0,0,0];
+  let invCoinValues = [2,5,10,20,50];
   
-  for(let [i,coin] of coinsInv.entries()){
-    change /= invCoinValues[i];
-    coin %= invCoinValues[i];
+  for(let i = 4; i>=0; i--){
+    coins[i] = Math.floor(change / invCoinValues[i]);
+    change %= invCoinValues[i];
   }
+
+  coins.unshift(change);
+
     
-  return coinsInv.reverse();
+  return coins;
 }
